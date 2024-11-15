@@ -45,7 +45,7 @@ public class UserController {
         User userSaved = userService.createOneUser(user);
         URI uriUser = ucb
                 .path("/api/v1/users/{id}")
-                .buildAndExpand(userSaved.getId_user())
+                .buildAndExpand(userSaved.getIdUser())
                 .toUri();
 
         return ResponseEntity.created( uriUser ).body(uriUser);
@@ -60,11 +60,12 @@ public class UserController {
                 userService.getUserById(id)
                     .map(user -> {
 
-                        user.setUser_name( updatedUser.getUser_name() );
+                        user.setUserName( updatedUser.getUserName() );
                         user.setName( updatedUser.getName() );
                         user.setPassword( updatedUser.getPassword() );
                         user.setPhone( updatedUser.getPhone() );
-                        user.setAvatar_url( updatedUser.getAvatar_url() );
+                        user.setAvatarUrl( updatedUser.getAvatarUrl() );
+                        user.setLocation(updatedUser.getLocation());
 
                         userService.updateOneUser(user);
                         return ResponseEntity.ok(user);

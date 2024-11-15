@@ -12,14 +12,19 @@ public class Species {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id_species;
+    private Long idSpecies;
 
-    private String species_name;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date created_at = new Date();
+    private String speciesName;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date updated_at = new Date();
+    private Date createdAt = new Date();
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Date();
+    }
 
 }
