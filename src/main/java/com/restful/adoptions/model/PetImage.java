@@ -10,8 +10,8 @@ public class PetImage {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id_pet_image;
+    private Long idPetImage;
 
-    private String image_url;
+    private String imageUrl;
 
 }

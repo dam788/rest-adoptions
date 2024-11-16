@@ -11,7 +11,7 @@ import java.util.Date;
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_pet;
+    private Long idPet;
 
     private String name;
     private String description;
@@ -22,13 +22,18 @@ public class Pet {
     private String gender;
     private boolean active;
     private boolean available;
-    private String avatar_url;
+    private String avatarUrl;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created_at = new Date();
+    private Date createdAt = new Date();
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date updated_at = new Date();
+    private Date updatedAt;
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Date();
+    }
 
     // falta relaciones
     //private Long id_user;

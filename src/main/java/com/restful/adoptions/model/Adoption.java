@@ -12,7 +12,7 @@ public class Adoption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_adoption;
+    private Long idAdoption;
 
     // falta relaciones
 
