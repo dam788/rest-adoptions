@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,13 +16,12 @@ public class Pet {
 
     private String name;
     private String description;
-
-    private int birthday;
-    private double weight;
+    private Integer birthday;
+    private Double weight;
     private String size;
     private String gender;
-    private boolean active;
-    private boolean available;
+    private Boolean active;
+    private Boolean available;
     private String avatarUrl;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -35,10 +35,15 @@ public class Pet {
         this.updatedAt = new Date();
     }
 
-    // falta relaciones
-    //private Long id_user;
-    //private Long id_species;
-    //private Long id_pet_image;
-    //private Long id_location;
+    @OneToOne
+    @JoinColumn(name = "idSpecies")
+    private Species species;
+
+    @OneToOne
+    @JoinColumn(name = "idLocation")
+    private Location location;
+
+    @OneToMany
+    private List<PetImage> petImages;
 
 }

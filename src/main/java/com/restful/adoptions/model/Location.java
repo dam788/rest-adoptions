@@ -14,7 +14,7 @@ public class Location {
 
     private String province;
     private String city;
-    private float lon;
-    private float lat;
+    private Float lon;
+    private Float lat;
 
 }

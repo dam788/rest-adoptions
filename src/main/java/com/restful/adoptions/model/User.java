@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -38,5 +39,12 @@ public class User {
     @OneToOne
     @JoinColumn(name = "idLocation")
     private Location location;
+
+    @OneToMany
+    private List<Pet> createdPets;
+
+    // revisar este
+    @OneToMany
+    private List<Adoption> adoptions;
 
 }
