@@ -2,4 +2,4 @@
 target
 /.idea/
 script.sql
-src/main/resources/application.properties
+src/main/resources/application.properties.example
