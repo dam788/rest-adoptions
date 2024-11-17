@@ -10,7 +10,7 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_location;
+    private Long idLocation;
 
     private String province;
     private String city;

@@ -13,30 +13,30 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user;
+    private Long idUser;
 
-    private String user_name;
+    private String userName;
     private String name;
     private String email;
     private String password;
     private Long phone;
     private Integer role;
     private Boolean active;
-    private String avatar_url;
+    private String avatarUrl;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date created_at = new Date();
+    private Date createdAt = new Date();
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date updated_at;
+    private Date updatedAt;
 
     @PreUpdate
     protected void onUpdate() {
-        this.updated_at = new Date();
+        this.updatedAt = new Date();
     }
 
     @OneToOne
-    @JoinColumn(name = "id_location")
+    @JoinColumn(name = "idLocation")
     private Location location;
 
 }
