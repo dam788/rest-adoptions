@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name= "pets")
@@ -163,5 +164,18 @@ public class Pet {
 
     public void setPetImages(List<PetImage> petImages) {
         this.petImages = petImages;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return Objects.equals(idPet, pet.idPet) && Objects.equals(name, pet.name) && Objects.equals(description, pet.description) && Objects.equals(birthday, pet.birthday) && Objects.equals(weight, pet.weight) && Objects.equals(size, pet.size) && Objects.equals(gender, pet.gender) && Objects.equals(active, pet.active) && Objects.equals(available, pet.available) && Objects.equals(avatarUrl, pet.avatarUrl) && Objects.equals(createdAt, pet.createdAt) && Objects.equals(updatedAt, pet.updatedAt) && Objects.equals(species, pet.species) && Objects.equals(location, pet.location) && Objects.equals(petImages, pet.petImages);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idPet, name, description, birthday, weight, size, gender, active, available, avatarUrl, createdAt, updatedAt, species, location, petImages);
     }
 }

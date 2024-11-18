@@ -51,7 +51,7 @@ public class SpeciesController {
         );
     }
 
-    @PutMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteSpecies(@PathVariable Long id) {
 
         speciesService.deleteOneSpeciesById(id);

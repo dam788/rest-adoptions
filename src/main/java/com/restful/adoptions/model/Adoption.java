@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name= "adoptions")
@@ -36,5 +37,18 @@ public class Adoption {
 
     public void setIdAdoption(Long idAdoption) {
         this.idAdoption = idAdoption;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Adoption adoption = (Adoption) o;
+        return Objects.equals(idAdoption, adoption.idAdoption) && Objects.equals(adoption_date, adoption.adoption_date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idAdoption, adoption_date);
     }
 }
