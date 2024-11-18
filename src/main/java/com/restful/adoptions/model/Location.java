@@ -3,6 +3,8 @@ package com.restful.adoptions.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Objects;
+
 @Entity
 @Data
 @Table(name= "locations")
@@ -16,5 +18,5 @@ public class Location {
     private String city;
     private Float lon;
     private Float lat;
-
+    
 }
