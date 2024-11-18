@@ -42,7 +42,7 @@ public class PetImageController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteImage ( @PathVariable Long id ) {
 
-        petImageService.deleteOnePetImage(id);
+        petImageService.deleteOnePetImage( id );
 
         return ResponseEntity.ok().body("Was deleted image with id " + id);
 
