@@ -20,18 +20,22 @@ public class PetService {
     }
 
     public Optional<Pet> getPetById (Long id ) {
-        return petRepository.findById(id);
+        return petRepository.findById( id );
     }
 
-    public Pet createOnePet ( Pet createdPet ) {
-        return petRepository.save( createdPet );
+    public Pet createOnePet ( Pet pet ) {
+        return petRepository.save( pet );
     }
 
-    public Pet updateOnePet ( Pet updatedPet ) {
-        return petRepository.save( updatedPet );
+    public Pet updateOnePet ( Pet pet ) {
+        return petRepository.save( pet );
     }
 
-    public Pet deleteOnePet ( Pet removedPet ) {
-        return petRepository.save( removedPet );
+    public Pet deleteOnePet ( Pet pet ) {
+        return petRepository.save( pet );
+    }
+
+    public Pet notAvailablePet ( Pet pet ) {
+        return petRepository.save( pet );
     }
 }

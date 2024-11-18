@@ -14,7 +14,7 @@ public class Species {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long idSpecies;
 
-    private String speciesName;
+    private String name;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();

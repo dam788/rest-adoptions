@@ -63,7 +63,7 @@ public class PetController {
                             pet.setWeight( updatedPet.getWeight() );
                             pet.setSize( updatedPet.getSize() );
                             pet.setGender( updatedPet.getGender() );
-                            pet.setAvailable( updatedPet.getAvailable() );
+                            pet.setAvailable( true );
                             pet.setAvatarUrl( updatedPet.getAvatarUrl() );
                             pet.setSpecies( updatedPet.getSpecies() );
                             pet.setPetImages( updatedPet.getPetImages() );
@@ -90,6 +90,28 @@ public class PetController {
                         .map(pet -> {
 
                             pet.setActive( false );
+
+                            petService.deleteOnePet(pet);
+                            return ResponseEntity.ok(pet);
+
+                        }).orElseGet(() -> {
+
+                            return ResponseEntity.notFound().build();
+
+                        })
+
+        );
+    }
+
+    @PutMapping("/not-available/{id}")
+    public ResponseEntity<?> notAvailablePet(@PathVariable Long id) {
+
+        return ResponseEntity.ok (
+
+                petService.getPetById(id)
+                        .map(pet -> {
+
+                            pet.setAvailable( false );
 
                             petService.deleteOnePet(pet);
                             return ResponseEntity.ok(pet);
