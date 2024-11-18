@@ -21,19 +21,19 @@ public class UserService {
     }
 
     public Optional <User> getUserById ( Long id ) {
-        return userRepository.findById(id);
+        return userRepository.findById( id );
     }
 
-    public User createOneUser ( User createdUser ) {
-        return userRepository.save( createdUser );
+    public User createOneUser ( User user ) {
+        return userRepository.save( user );
     }
 
-    public User updateOneUser ( User updatedUser ) {
-        return userRepository.save( updatedUser );
+    public User updateOneUser ( User user ) {
+        return userRepository.save( user );
     }
 
-    public User deleteOneUser ( User removedUser ) {
-        return userRepository.save( removedUser );
+    public User deleteOneUser ( User user ) {
+        return userRepository.save( user );
     }
 
 }

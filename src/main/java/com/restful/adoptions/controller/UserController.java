@@ -65,9 +65,10 @@ public class UserController {
                         user.setPassword( updatedUser.getPassword() );
                         user.setPhone( updatedUser.getPhone() );
                         user.setAvatarUrl( updatedUser.getAvatarUrl() );
+                        user.setCreatedPets(updatedUser.getCreatedPets());
                         user.setLocation(updatedUser.getLocation());
-
                         userService.updateOneUser(user);
+
                         return ResponseEntity.ok(user);
 
                     }).orElseGet(() -> {

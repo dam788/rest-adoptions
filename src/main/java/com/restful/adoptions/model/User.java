@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -34,6 +35,9 @@ public class User {
     protected void onUpdate() {
         this.updatedAt = new Date();
     }
+
+    @OneToMany
+    private List<Pet> createdPets;
 
     @OneToOne
     @JoinColumn(name = "idLocation")
