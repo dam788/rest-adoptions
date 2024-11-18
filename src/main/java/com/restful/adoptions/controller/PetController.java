@@ -1,7 +1,6 @@
 package com.restful.adoptions.controller;
 
 import com.restful.adoptions.model.Pet;
-import com.restful.adoptions.model.User;
 import com.restful.adoptions.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

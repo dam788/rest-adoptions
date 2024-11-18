@@ -1,12 +1,14 @@
 package com.restful.adoptions.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
-@Data
 @Table( name = "species")
 public class Species {
 
@@ -25,6 +27,51 @@ public class Species {
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = new Date();
+    }
+
+    public Long getIdSpecies() {
+        return idSpecies;
+    }
+
+    public void setIdSpecies(Long idSpecies) {
+        this.idSpecies = idSpecies;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Species species = (Species) o;
+        return Objects.equals(idSpecies, species.idSpecies) && Objects.equals(name, species.name) && Objects.equals(createdAt, species.createdAt) && Objects.equals(updatedAt, species.updatedAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idSpecies, name, createdAt, updatedAt);
     }
 
 }

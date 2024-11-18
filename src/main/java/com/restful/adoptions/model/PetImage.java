@@ -3,8 +3,9 @@ package com.restful.adoptions.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Objects;
+
 @Entity
-@Data
 @Table( name = "pet_images")
 public class PetImage {
 
@@ -14,4 +15,32 @@ public class PetImage {
 
     private String imageUrl;
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Long getIdPetImage() {
+        return idPetImage;
+    }
+
+    public void setIdPetImage(Long idPetImage) {
+        this.idPetImage = idPetImage;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PetImage petImage = (PetImage) o;
+        return Objects.equals(idPetImage, petImage.idPetImage) && Objects.equals(imageUrl, petImage.imageUrl);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idPetImage, imageUrl);
+    }
 }
