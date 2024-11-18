@@ -89,8 +89,8 @@ public class PetController {
                         .map(pet -> {
 
                             pet.setActive( false );
-
                             petService.deleteOnePet(pet);
+
                             return ResponseEntity.ok(pet);
 
                         }).orElseGet(() -> {
@@ -111,8 +111,8 @@ public class PetController {
                         .map(pet -> {
 
                             pet.setAvailable( false );
+                            petService.notAvailablePet(pet);
 
-                            petService.deleteOnePet(pet);
                             return ResponseEntity.ok(pet);
 
                         }).orElseGet(() -> {

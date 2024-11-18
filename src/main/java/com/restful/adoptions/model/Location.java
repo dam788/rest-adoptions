@@ -3,6 +3,8 @@ package com.restful.adoptions.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Objects;
+
 @Entity
 @Table(name= "locations")
 public class Location {
@@ -15,6 +17,8 @@ public class Location {
     private String city;
     private Float lon;
     private Float lat;
+  
+  
 
     public Long getIdLocation() {
         return idLocation;
@@ -55,4 +59,5 @@ public class Location {
     public void setProvince(String province) {
         this.province = province;
     }
+
 }
