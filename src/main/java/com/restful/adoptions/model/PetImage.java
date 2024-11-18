@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Data
 @Table( name = "pet_images")
 public class PetImage {
 
@@ -14,4 +13,19 @@ public class PetImage {
 
     private String imageUrl;
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Long getIdPetImage() {
+        return idPetImage;
+    }
+
+    public void setIdPetImage(Long idPetImage) {
+        this.idPetImage = idPetImage;
+    }
 }

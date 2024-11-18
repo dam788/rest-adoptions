@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Entity
-@Data
 @Table(name= "adoptions")
 public class Adoption {
 
@@ -22,5 +21,20 @@ public class Adoption {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date adoption_date = new Date();
-    
+
+    public Date getAdoption_date() {
+        return adoption_date;
+    }
+
+    public void setAdoption_date(Date adoption_date) {
+        this.adoption_date = adoption_date;
+    }
+
+    public Long getIdAdoption() {
+        return idAdoption;
+    }
+
+    public void setIdAdoption(Long idAdoption) {
+        this.idAdoption = idAdoption;
+    }
 }
