@@ -34,9 +34,8 @@ public class PetController {
 
     }
 
-
     @PostMapping
-    public ResponseEntity <URI> createPet (@RequestBody Pet pet, UriComponentsBuilder ucb ) {
+    public ResponseEntity <Pet> createPet (@RequestBody Pet pet, UriComponentsBuilder ucb ) {
 
         Pet petSaved = petService.createOnePet(pet);
         URI uriPet = ucb
@@ -44,7 +43,7 @@ public class PetController {
                 .buildAndExpand(petSaved.getIdPet())
                 .toUri();
 
-        return ResponseEntity.created( uriPet ).body(uriPet);
+        return ResponseEntity.created( uriPet ).body( petSaved );
 
     }
 

@@ -39,8 +39,11 @@ public class User {
     private List<Pet> createdPets;
 
     @OneToOne
-    @JoinColumn(name = "idLocation")
+    @JoinColumn( name = "isLocation" )
     private Location location;
+
+    //@OneToMany(mappedBy = "user")
+    //private List<Adoption> adoptions;
 
     public Long getIdUser() {
         return idUser;
@@ -146,16 +149,4 @@ public class User {
         this.location = location;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(idUser, user.idUser) && Objects.equals(userName, user.userName) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(phone, user.phone) && Objects.equals(role, user.role) && Objects.equals(active, user.active) && Objects.equals(avatarUrl, user.avatarUrl) && Objects.equals(createdAt, user.createdAt) && Objects.equals(updatedAt, user.updatedAt) && Objects.equals(createdPets, user.createdPets) && Objects.equals(location, user.location);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idUser, userName, name, email, password, phone, role, active, avatarUrl, createdAt, updatedAt, createdPets, location);
-    }
 }

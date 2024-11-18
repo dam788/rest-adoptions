@@ -3,3 +3,4 @@ target
 /.idea/
 script.sql
 src/main/resources/application.properties
+schemaDB.png

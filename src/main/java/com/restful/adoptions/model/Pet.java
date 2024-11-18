@@ -10,6 +10,7 @@ import java.util.Objects;
 @Entity
 @Table(name= "pets")
 public class Pet {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPet;
@@ -40,7 +41,7 @@ public class Pet {
     private Species species;
 
     @OneToOne
-    @JoinColumn(name = "idLocation")
+    @JoinColumn( name = "idLocation" )
     private Location location;
 
     @OneToMany
@@ -165,6 +166,7 @@ public class Pet {
     public void setPetImages(List<PetImage> petImages) {
         this.petImages = petImages;
     }
+
 
     @Override
     public boolean equals(Object o) {
