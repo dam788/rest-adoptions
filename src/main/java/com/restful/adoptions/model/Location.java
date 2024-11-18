@@ -3,6 +3,8 @@ package com.restful.adoptions.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Objects;
+
 @Entity
 @Table(name= "locations")
 public class Location {
@@ -54,5 +56,18 @@ public class Location {
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Location location = (Location) o;
+        return Objects.equals(idLocation, location.idLocation) && Objects.equals(province, location.province) && Objects.equals(city, location.city) && Objects.equals(lon, location.lon) && Objects.equals(lat, location.lat);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idLocation, province, city, lon, lat);
     }
 }
