@@ -19,11 +19,11 @@ public class PetImageService {
         return petImageRepository.findAll();
     };
 
-    public PetImage createOnePickImage (PetImage image) {
+    public PetImage createOnePickImage ( PetImage image ) {
         return petImageRepository.save( image );
     }
 
-    public void deleteOnePetImage (Long id) {
+    public void deletePetImageById ( Long id ) {
         petImageRepository.deleteById( id );
     }
 
