@@ -32,7 +32,19 @@ public class UserService {
         return userRepository.save( user );
     }
 
+    public User updatePetsUser ( User user ) {
+        return userRepository.save( user );
+    }
+
+    public User updateLocationUser ( User user ) {
+        return userRepository.save( user );
+    }
+
     public User deleteOneUser ( User user ) {
+        return userRepository.save( user );
+    }
+
+    public User deletePetsUser ( User user ) {
         return userRepository.save( user );
     }
 
