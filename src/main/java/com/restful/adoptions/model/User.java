@@ -35,15 +35,13 @@ public class User {
         this.updatedAt = new Date();
     }
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> createdPets;
 
     @OneToOne
     @JoinColumn( name = "isLocation" )
     private Location location;
 
-    //@OneToMany(mappedBy = "user")
-    //private List<Adoption> adoptions;
 
     public Long getIdUser() {
         return idUser;
