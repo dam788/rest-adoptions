@@ -27,7 +27,7 @@ public class PetImageController {
     }
 
     @PostMapping
-    public ResponseEntity<URI> createPetImage (@RequestBody PetImage petImage, UriComponentsBuilder ucb ) {
+    public ResponseEntity<PetImage> createPetImage (@RequestBody PetImage petImage, UriComponentsBuilder ucb ) {
 
         PetImage imageSaved = petImageService.createOnePickImage(petImage);
         URI uriImage = ucb
@@ -35,7 +35,7 @@ public class PetImageController {
                 .buildAndExpand( imageSaved.getIdPetImage() )
                 .toUri();
 
-        return ResponseEntity.created( uriImage ).body(uriImage);
+        return ResponseEntity.created( uriImage ).body( imageSaved );
 
     }
 

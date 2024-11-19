@@ -23,7 +23,7 @@ public class SpeciesController {
     }
 
     @PostMapping
-    public ResponseEntity <URI> createSpecies (@RequestBody Species species, UriComponentsBuilder ucb) {
+    public ResponseEntity <Species> createSpecies (@RequestBody Species species, UriComponentsBuilder ucb) {
 
         Species speciesSaved = speciesService.createOneSpecies(species);
         URI uriSpecies = ucb
@@ -31,7 +31,7 @@ public class SpeciesController {
                 .buildAndExpand(speciesSaved.getIdSpecies())
                 .toUri();
 
-        return ResponseEntity.created( uriSpecies ).body(uriSpecies);
+        return ResponseEntity.created( uriSpecies ).body( speciesSaved );
     }
 
     @PutMapping("/{id}")

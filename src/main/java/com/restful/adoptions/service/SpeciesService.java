@@ -14,6 +14,8 @@ public class SpeciesService {
     @Autowired
     private SpeciesRepository speciesRepository;
 
+
+
     public List <Species> getAllSpecies () {
         return speciesRepository.findAll();
     }
