@@ -49,7 +49,7 @@ public class UserController {
 
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@RequestBody User updatedUser, @PathVariable Long id) {
 
         return ResponseEntity.ok (
@@ -62,6 +62,8 @@ public class UserController {
                         user.setPassword( updatedUser.getPassword() );
                         user.setPhone( updatedUser.getPhone() );
                         user.setAvatarUrl( updatedUser.getAvatarUrl() );
+                        user.setLocation( updatedUser.getLocation() );
+                        user.setCreatedPets( updatedUser.getCreatedPets() );
                         userService.updateOneUser(user);
 
                         return ResponseEntity.ok( user );
@@ -71,50 +73,6 @@ public class UserController {
                         return ResponseEntity.notFound().build();
 
                     })
-
-        );
-    }
-
-    @PutMapping("/update-location/{id}")
-    public ResponseEntity<?> updateLocationUser(@RequestBody User updatedUser, @PathVariable Long id) {
-
-        return ResponseEntity.ok (
-
-                userService.getUserById(id)
-                        .map(user -> {
-
-                            user.setLocation( updatedUser.getLocation() );
-                            userService.updateLocationUser( user );
-
-                            return ResponseEntity.ok( user );
-
-                        }).orElseGet(() -> {
-
-                            return ResponseEntity.notFound().build();
-
-                        })
-
-        );
-    }
-
-    @PutMapping("/update-pets/{id}")
-    public ResponseEntity<?> updatePetsUser(@RequestBody User updatedUser, @PathVariable Long id) {
-
-        return ResponseEntity.ok (
-
-                userService.getUserById(id)
-                        .map(user -> {
-
-                            user.setCreatedPets( updatedUser.getCreatedPets() );
-                            userService.updatePetsUser( user );
-
-                            return ResponseEntity.ok( user );
-
-                        }).orElseGet(() -> {
-
-                            return ResponseEntity.notFound().build();
-
-                        })
 
         );
     }
@@ -140,28 +98,5 @@ public class UserController {
 
         );
     }
-
-    @PutMapping("/delete-pets/{id}")
-    public ResponseEntity<?> deletePetsUser(@PathVariable Long id) {
-
-        return ResponseEntity.ok (
-
-                userService.getUserById(id)
-                        .map(user -> {
-
-                            user.setCreatedPets( null );
-                            userService.deletePetsUser( user );
-
-                            return ResponseEntity.ok(user);
-
-                        }).orElseGet(() -> {
-
-                            return ResponseEntity.notFound().build();
-
-                        })
-
-        );
-    }
-
 
 }

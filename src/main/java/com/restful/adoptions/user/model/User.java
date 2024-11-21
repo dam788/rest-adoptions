@@ -35,7 +35,7 @@ public class User {
         this.updatedAt = new Date();
     }
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
     private List<Pet> createdPets;
 
     @OneToOne
