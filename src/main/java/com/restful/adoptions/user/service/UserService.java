@@ -1,6 +1,6 @@
 package com.restful.adoptions.user.service;
 
-import com.restful.adoptions.user.model.User;
+import com.restful.adoptions.user.model.UserEntity;
 import com.restful.adoptions.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,23 +16,23 @@ public class UserService {
 
 
 
-    public List <User> getAllUsers () {
+    public List <UserEntity> getAllUsers () {
         return userRepository.findAll();
     }
 
-    public Optional <User> getUserById ( Long id ) {
+    public Optional <UserEntity> getUserById (Long id ) {
         return userRepository.findById( id );
     }
 
-    public User createOneUser ( User user ) {
-        return userRepository.save( user );
+    public UserEntity createOneUser (UserEntity userEntity) {
+        return userRepository.save(userEntity);
     }
 
-    public User updateOneUser ( User user ) {
-        return userRepository.save( user );
+    public UserEntity updateOneUser (UserEntity userEntity) {
+        return userRepository.save(userEntity);
     }
 
-    public User deleteOneUser ( User user ) {
-        return userRepository.save( user );
+    public UserEntity deleteOneUser (UserEntity userEntity) {
+        return userRepository.save(userEntity);
     }
 }
