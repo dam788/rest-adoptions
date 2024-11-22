@@ -1,6 +1,6 @@
 package com.restful.adoptions.pet.service;
 
-import com.restful.adoptions.pet.model.Pet;
+import com.restful.adoptions.pet.model.PetEntity;
 import com.restful.adoptions.pet.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,27 +16,27 @@ public class PetService {
 
 
 
-    public List<Pet> getAllPets () {
+    public List<PetEntity> getAllPets () {
         return petRepository.findAll();
     }
 
-    public Optional<Pet> getPetById (Long id ) {
+    public Optional<PetEntity> getPetById (Long id ) {
         return petRepository.findById( id );
     }
 
-    public Pet createOnePet ( Pet pet ) {
-        return petRepository.save( pet );
+    public PetEntity createOnePet (PetEntity petEntity) {
+        return petRepository.save(petEntity);
     }
 
-    public Pet updateOnePet ( Pet pet ) {
-        return petRepository.save( pet );
+    public PetEntity updateOnePet (PetEntity petEntity) {
+        return petRepository.save(petEntity);
     }
 
-    public Pet deleteOnePet ( Pet pet ) {
-        return petRepository.save( pet );
+    public PetEntity deleteOnePet (PetEntity petEntity) {
+        return petRepository.save(petEntity);
     }
 
-    public Pet notAvailablePet ( Pet pet ) {
-        return petRepository.save( pet );
+    public PetEntity notAvailablePet (PetEntity petEntity) {
+        return petRepository.save(petEntity);
     }
 }

@@ -1,6 +1,6 @@
 package com.restful.adoptions.pet.controller;
 
-import com.restful.adoptions.pet.model.Pet;
+import com.restful.adoptions.pet.model.PetEntity;
 import com.restful.adoptions.pet.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,54 +21,54 @@ public class PetController {
 
 
     @GetMapping
-    public ResponseEntity<List<Pet>> getPets () {
+    public ResponseEntity<List<PetEntity>> getPets () {
 
         return ResponseEntity.ok( petService.getAllPets() );
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity <Optional<Pet>> getPet (@PathVariable Long id ) {
+    public ResponseEntity <Optional<PetEntity>> getPet (@PathVariable Long id ) {
 
         return ResponseEntity.ok( petService.getPetById(id) );
 
     }
 
     @PostMapping
-    public ResponseEntity <Pet> createPet (@RequestBody Pet pet, UriComponentsBuilder ucb ) {
+    public ResponseEntity <PetEntity> createPet (@RequestBody PetEntity petEntity, UriComponentsBuilder ucb ) {
 
-        Pet petSaved = petService.createOnePet(pet);
+        PetEntity petEntitySaved = petService.createOnePet(petEntity);
         URI uriPet = ucb
                 .path("/api/v1/pets/{id}")
-                .buildAndExpand(petSaved.getIdPet())
+                .buildAndExpand(petEntitySaved.getIdPet())
                 .toUri();
 
-        return ResponseEntity.created( uriPet ).body( petSaved );
+        return ResponseEntity.created( uriPet ).body(petEntitySaved);
 
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePet(@RequestBody Pet updatedPet, @PathVariable Long id) {
+    public ResponseEntity<?> updatePet(@RequestBody PetEntity updatedPetEntity, @PathVariable Long id) {
 
         return ResponseEntity.ok (
 
                 petService.getPetById(id)
-                        .map(pet -> {
+                        .map(petEntity -> {
 
-                            pet.setName( updatedPet.getName() );
-                            pet.setDescription( updatedPet.getDescription() );
-                            pet.setBirthday( updatedPet.getBirthday() );
-                            pet.setWeight( updatedPet.getWeight() );
-                            pet.setSize( updatedPet.getSize() );
-                            pet.setGender( updatedPet.getGender() );
-                            pet.setAvailable( true );
-                            pet.setAvatarUrl( updatedPet.getAvatarUrl() );
-                            pet.setSpecies( updatedPet.getSpecies() );
-                            pet.setPetImages( updatedPet.getPetImages() );
-                            pet.setLocation( updatedPet.getLocation() );
-                            petService.updateOnePet(pet);
+                            petEntity.setName( updatedPetEntity.getName() );
+                            petEntity.setDescription( updatedPetEntity.getDescription() );
+                            petEntity.setBirthday( updatedPetEntity.getBirthday() );
+                            petEntity.setWeight( updatedPetEntity.getWeight() );
+                            petEntity.setSize( updatedPetEntity.getSize() );
+                            petEntity.setGender( updatedPetEntity.getGender() );
+                            petEntity.setAvailable( true );
+                            petEntity.setAvatarUrl( updatedPetEntity.getAvatarUrl() );
+                            petEntity.setSpeciesEntity( updatedPetEntity.getSpeciesEntity() );
+                            petEntity.setPetImageEntities( updatedPetEntity.getPetImageEntities() );
+                            petEntity.setLocationEntity( updatedPetEntity.getLocationEntity() );
+                            petService.updateOnePet(petEntity);
 
-                            return ResponseEntity.ok(pet);
+                            return ResponseEntity.ok(petEntity);
 
                         }).orElseGet(() -> {
 
@@ -85,12 +85,12 @@ public class PetController {
         return ResponseEntity.ok (
 
                 petService.getPetById(id)
-                        .map(pet -> {
+                        .map(petEntity -> {
 
-                            pet.setActive( false );
-                            petService.deleteOnePet(pet);
+                            petEntity.setActive( false );
+                            petService.deleteOnePet(petEntity);
 
-                            return ResponseEntity.ok(pet);
+                            return ResponseEntity.ok(petEntity);
 
                         }).orElseGet(() -> {
 
@@ -107,12 +107,12 @@ public class PetController {
         return ResponseEntity.ok (
 
                 petService.getPetById(id)
-                        .map(pet -> {
+                        .map(petEntity -> {
 
-                            pet.setAvailable( false );
-                            petService.notAvailablePet(pet);
+                            petEntity.setAvailable( false );
+                            petService.notAvailablePet(petEntity);
 
-                            return ResponseEntity.ok(pet);
+                            return ResponseEntity.ok(petEntity);
 
                         }).orElseGet(() -> {
 

@@ -1,6 +1,6 @@
 package com.restful.adoptions.user.config;
 
-//mport com.restful.adoptions.user.service.UserDetailServiceImpl;
+import com.restful.adoptions.user.service.UserDetailServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,11 +67,11 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider (){
+    public AuthenticationProvider authenticationProvider (UserDetailServiceImp userDetailServiceImp){
 
         DaoAuthenticationProvider  provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder( passwordEncoder() );
-        provider.setUserDetailsService( userDetailsService() );
+        provider.setUserDetailsService( userDetailServiceImp );
 
         return provider;
 
@@ -80,15 +80,8 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder (){
 
-        //return new BCryptPasswordEncoder();
         return NoOpPasswordEncoder.getInstance();
 
-    }
-
-    @Bean UserDetailsService userDetailsService () {
-        List<UserDetails> userDetailsList=new ArrayList<>();
-
-        return new InMemoryUserDetailsManager(userDetailsList);
     }
 
 }

@@ -1,8 +1,8 @@
 package com.restful.adoptions.pet.model;
 
-import com.restful.adoptions.location.model.Location;
-import com.restful.adoptions.petimage.model.PetImage;
-import com.restful.adoptions.specie.model.Species;
+import com.restful.adoptions.location.model.LocationEntity;
+import com.restful.adoptions.petimage.model.PetImageEntity;
+import com.restful.adoptions.specie.model.SpeciesEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name= "pets")
-public class Pet {
+public class PetEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,13 +47,13 @@ public class Pet {
 
     @OneToOne
     @JoinColumn(name = "idSpecies")
-    private Species species;
+    private SpeciesEntity speciesEntity;
 
     @OneToOne
     @JoinColumn( name = "idLocation" )
-    private Location location;
+    private LocationEntity locationEntity;
 
     @OneToMany
-    private List<PetImage> petImages;
+    private List<PetImageEntity> petImageEntities;
 
 }
