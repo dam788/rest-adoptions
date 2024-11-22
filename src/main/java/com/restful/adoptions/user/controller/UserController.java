@@ -1,7 +1,7 @@
 package com.restful.adoptions.user.controller;
 
 import com.restful.adoptions.user.model.UserEntity;
-import com.restful.adoptions.user.service.UserService;
+import com.restful.adoptions.user.service.UserDetailServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,8 +18,7 @@ import java.util.Optional;
 public class UserController {
 
     @Autowired
-    private UserService userService;
-
+    private UserDetailServiceImp userService;
 
 
     @GetMapping
@@ -31,6 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('READ')")
     public ResponseEntity <Optional <UserEntity> > getUser (@PathVariable Long id ) {
 
         return ResponseEntity.ok( userService.getUserById(id) );
@@ -38,6 +38,7 @@ public class UserController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('READ', 'CREATE')")
     public ResponseEntity <URI> createUser (@RequestBody UserEntity userEntity, UriComponentsBuilder ucb ) {
 
         UserEntity userEntitySaved = userService.createOneUser(userEntity);
@@ -51,6 +52,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('READ', 'UPDATE')")
     public ResponseEntity<?> updateUser(@RequestBody UserEntity updatedUserEntity, @PathVariable Long id) {
 
         return ResponseEntity.ok (
@@ -74,6 +76,7 @@ public class UserController {
     }
 
     @PutMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('READ', 'DELETE')")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
 
         return ResponseEntity.ok (

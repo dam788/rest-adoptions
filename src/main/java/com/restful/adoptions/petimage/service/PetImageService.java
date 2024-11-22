@@ -1,6 +1,6 @@
 package com.restful.adoptions.petimage.service;
 
-import com.restful.adoptions.petimage.model.PetImage;
+import com.restful.adoptions.petimage.model.PetImageEntity;
 import com.restful.adoptions.petimage.repository.PetImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ public class PetImageService {
 
 
 
-    public List<PetImage> getAllPetImages () {
+    public List<PetImageEntity> getAllPetImages () {
         return petImageRepository.findAll();
     };
 
-    public PetImage createOnePickImage ( PetImage image ) {
+    public PetImageEntity createOnePickImage (PetImageEntity image ) {
         return petImageRepository.save( image );
     }
 

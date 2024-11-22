@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table( name = "pet_images")
-public class PetImage {
+public class PetImageEntity {
 
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
@@ -34,8 +34,8 @@ public class PetImage {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PetImage petImage = (PetImage) o;
-        return Objects.equals(idPetImage, petImage.idPetImage) && Objects.equals(imageUrl, petImage.imageUrl);
+        PetImageEntity petImageEntity = (PetImageEntity) o;
+        return Objects.equals(idPetImage, petImageEntity.idPetImage) && Objects.equals(imageUrl, petImageEntity.imageUrl);
     }
 
     @Override

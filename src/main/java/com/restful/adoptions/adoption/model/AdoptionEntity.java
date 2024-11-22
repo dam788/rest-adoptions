@@ -1,6 +1,6 @@
 package com.restful.adoptions.adoption.model;
 
-import com.restful.adoptions.pet.model.Pet;
+import com.restful.adoptions.pet.model.PetEntity;
 import com.restful.adoptions.user.model.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name= "adoptions")
-public class Adoption {
+public class AdoptionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class Adoption {
 
     @ManyToOne
     @JoinColumn(name = "idPet")
-    private Pet pet;
+    private PetEntity pet;
 
     @ManyToOne
     @JoinColumn(name = "idUser")

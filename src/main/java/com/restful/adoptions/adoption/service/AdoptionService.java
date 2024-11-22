@@ -1,6 +1,6 @@
 package com.restful.adoptions.adoption.service;
 
-import com.restful.adoptions.adoption.model.Adoption;
+import com.restful.adoptions.adoption.model.AdoptionEntity;
 import com.restful.adoptions.adoption.repository.AdoptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,20 +16,20 @@ public class AdoptionService {
 
 
 
-    public List<Adoption> getAllAdoptions() {
+    public List<AdoptionEntity> getAllAdoptions() {
         return adoptionRepository.findAll();
     }
 
-    public Optional<Adoption> getAdoptionById(Long id) {
+    public Optional<AdoptionEntity> getAdoptionById(Long id) {
         return adoptionRepository.findById( id );
     }
 
-    public Adoption createOneAdoption(Adoption adoption) {
-        return adoptionRepository.save(adoption);
+    public AdoptionEntity createOneAdoption(AdoptionEntity adoptionEntity) {
+        return adoptionRepository.save(adoptionEntity);
     }
 
-    public Adoption updateOneAdoption(Adoption adoption) {
-        return adoptionRepository.save(adoption);
+    public AdoptionEntity updateOneAdoption(AdoptionEntity adoptionEntity) {
+        return adoptionRepository.save(adoptionEntity);
     }
 
     public void deleteAdoptionById(Long id) {

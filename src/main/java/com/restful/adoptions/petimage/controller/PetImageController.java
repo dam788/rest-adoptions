@@ -1,6 +1,6 @@
 package com.restful.adoptions.petimage.controller;
 
-import com.restful.adoptions.petimage.model.PetImage;
+import com.restful.adoptions.petimage.model.PetImageEntity;
 import com.restful.adoptions.petimage.service.PetImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +20,16 @@ public class PetImageController {
 
 
     @GetMapping
-    public ResponseEntity <List<PetImage>> getPetImages () {
+    public ResponseEntity <List<PetImageEntity>> getPetImages () {
 
         return ResponseEntity.ok( petImageService.getAllPetImages() );
 
     }
 
     @PostMapping
-    public ResponseEntity<PetImage> createPetImage (@RequestBody PetImage petImage, UriComponentsBuilder ucb ) {
+    public ResponseEntity<PetImageEntity> createPetImage (@RequestBody PetImageEntity petImageEntity, UriComponentsBuilder ucb ) {
 
-        PetImage imageSaved = petImageService.createOnePickImage(petImage);
+        PetImageEntity imageSaved = petImageService.createOnePickImage(petImageEntity);
         URI uriImage = ucb
                 .path( "/api/v1/images/{id}" )
                 .buildAndExpand( imageSaved.getIdPetImage() )

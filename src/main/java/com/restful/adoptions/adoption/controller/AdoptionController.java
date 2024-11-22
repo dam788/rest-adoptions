@@ -1,6 +1,6 @@
 package com.restful.adoptions.adoption.controller;
 
-import com.restful.adoptions.adoption.model.Adoption;
+import com.restful.adoptions.adoption.model.AdoptionEntity;
 import com.restful.adoptions.adoption.service.AdoptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,37 +19,37 @@ public class AdoptionController {
 
 
     @GetMapping
-    public ResponseEntity<List <Adoption> > getAllAdoptions() {
+    public ResponseEntity<List <AdoptionEntity> > getAllAdoptions() {
 
         return ResponseEntity.ok( adoptionService.getAllAdoptions() );
 
     }
 
     @PostMapping
-    public ResponseEntity<Adoption> createAdoption(@RequestBody Adoption adoption, UriComponentsBuilder ucb) {
+    public ResponseEntity<AdoptionEntity> createAdoption(@RequestBody AdoptionEntity adoptionEntity, UriComponentsBuilder ucb) {
 
-        Adoption adoptionSaved = adoptionService.createOneAdoption(adoption);
+        AdoptionEntity adoptionEntitySaved = adoptionService.createOneAdoption(adoptionEntity);
         URI uriAdoption = ucb
                 .path("/api/v1/adoptions/{id}")
-                .buildAndExpand(adoptionSaved.getIdAdoption())
+                .buildAndExpand(adoptionEntitySaved.getIdAdoption())
                 .toUri();
 
-        return ResponseEntity.created( uriAdoption ).body(adoptionSaved);
+        return ResponseEntity.created( uriAdoption ).body(adoptionEntitySaved);
 
     }
     
     @PutMapping("/{id}")
-    public ResponseEntity<Adoption> updatedAdoption (@RequestBody Adoption updatedAdoption, @PathVariable Long id) {
+    public ResponseEntity<AdoptionEntity> updatedAdoption (@RequestBody AdoptionEntity updatedAdoptionEntity, @PathVariable Long id) {
         return ResponseEntity.ok (
 
                 adoptionService.getAdoptionById( id )
-                        .map(adoption -> {
+                        .map(adoptionEntity -> {
 
-                            adoption.setUser( updatedAdoption.getUser() );
-                            adoption.setPet( updatedAdoption.getPet() );
-                            adoptionService.updateOneAdoption(adoption);
+                            adoptionEntity.setUser( updatedAdoptionEntity.getUser() );
+                            adoptionEntity.setPet( updatedAdoptionEntity.getPet() );
+                            adoptionService.updateOneAdoption(adoptionEntity);
 
-                            return ResponseEntity.ok(adoption);
+                            return ResponseEntity.ok(adoptionEntity);
 
                         }).orElseGet(() -> {
 
