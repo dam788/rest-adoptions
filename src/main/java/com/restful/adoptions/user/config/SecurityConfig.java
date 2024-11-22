@@ -71,7 +71,7 @@ public class SecurityConfig {
 
         DaoAuthenticationProvider  provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder( passwordEncoder() );
-        provider.setUserDetailsService( null );
+        provider.setUserDetailsService( userDetailsService() );
 
         return provider;
 
@@ -83,6 +83,12 @@ public class SecurityConfig {
         //return new BCryptPasswordEncoder();
         return NoOpPasswordEncoder.getInstance();
 
+    }
+
+    @Bean UserDetailsService userDetailsService () {
+        List<UserDetails> userDetailsList=new ArrayList<>();
+
+        return new InMemoryUserDetailsManager(userDetailsList);
     }
 
 }

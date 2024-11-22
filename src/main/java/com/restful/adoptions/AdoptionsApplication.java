@@ -5,7 +5,6 @@ import com.restful.adoptions.user.model.Role;
 import com.restful.adoptions.user.model.RoleEnum;
 import com.restful.adoptions.user.model.UserEntity;
 import com.restful.adoptions.user.repository.UserRepository;
-import org.aspectj.lang.annotation.After;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +21,7 @@ public class AdoptionsApplication {
 	}
 
 	@Bean
-	public CommandLineRunner init(UserRepository userRepository) {
+	public CommandLineRunner init(UserRepository user) {
 
 		return args -> {
 
@@ -131,7 +130,7 @@ public class AdoptionsApplication {
 					.roles(Set.of(roleUser))
 					.build();
 
-			userRepository.saveAll(List.of(
+			user.saveAll(List.of(
 
 					userEntityDamian,
 					userEntityAle,
