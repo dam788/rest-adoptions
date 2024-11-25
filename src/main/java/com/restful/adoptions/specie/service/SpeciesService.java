@@ -1,6 +1,6 @@
 package com.restful.adoptions.specie.service;
 
-import com.restful.adoptions.specie.model.Species;
+import com.restful.adoptions.specie.model.SpeciesEntity;
 import com.restful.adoptions.specie.repository.SpeciesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,20 +16,20 @@ public class SpeciesService {
 
 
 
-    public List <Species> getAllSpecies () {
+    public List <SpeciesEntity> getAllSpecies () {
         return speciesRepository.findAll();
     }
 
-    public Optional<Species> getSpeciesById (Long id) {
+    public Optional<SpeciesEntity> getSpeciesById (Long id) {
         return speciesRepository.findById(id);
     }
 
-    public Species createOneSpecies ( Species species ) {
-        return speciesRepository.save( species );
+    public SpeciesEntity createOneSpecies (SpeciesEntity speciesEntity) {
+        return speciesRepository.save(speciesEntity);
     }
 
-    public void updateOneSpecies (Species species ) {
-        speciesRepository.save(species);
+    public void updateOneSpecies (SpeciesEntity speciesEntity) {
+        speciesRepository.save(speciesEntity);
     }
 
     public void deleteOneSpeciesById (Long id ) {

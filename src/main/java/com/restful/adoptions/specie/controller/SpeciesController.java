@@ -1,6 +1,6 @@
 package com.restful.adoptions.specie.controller;
 
-import com.restful.adoptions.specie.model.Species;
+import com.restful.adoptions.specie.model.SpeciesEntity;
 import com.restful.adoptions.specie.service.SpeciesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,33 +18,33 @@ public class SpeciesController {
     private SpeciesService speciesService;
 
     @GetMapping
-    public ResponseEntity <List<Species>> getSpecies() {
+    public ResponseEntity <List<SpeciesEntity>> getSpecies() {
         return ResponseEntity.ok( speciesService.getAllSpecies() );
     }
 
     @PostMapping
-    public ResponseEntity <Species> createSpecies (@RequestBody Species species, UriComponentsBuilder ucb) {
+    public ResponseEntity <SpeciesEntity> createSpecies (@RequestBody SpeciesEntity speciesEntity, UriComponentsBuilder ucb) {
 
-        Species speciesSaved = speciesService.createOneSpecies(species);
+        SpeciesEntity speciesEntitySaved = speciesService.createOneSpecies(speciesEntity);
         URI uriSpecies = ucb
                 .path("/api/v1/species/{id}")
-                .buildAndExpand(speciesSaved.getIdSpecies())
+                .buildAndExpand(speciesEntitySaved.getIdSpecies())
                 .toUri();
 
-        return ResponseEntity.created( uriSpecies ).body( speciesSaved );
+        return ResponseEntity.created( uriSpecies ).body(speciesEntitySaved);
     }
 
     @PutMapping("/{id}")
-    public  ResponseEntity<?> updateSpecies(@RequestBody Species updatedSpecies, @PathVariable Long id) {
+    public  ResponseEntity<?> updateSpecies(@RequestBody SpeciesEntity updatedSpeciesEntity, @PathVariable Long id) {
 
         return ResponseEntity.ok (
 
                 speciesService.getSpeciesById(id)
-                        .map(species -> {
-                            species.setName(updatedSpecies.getName());
-                            speciesService.updateOneSpecies(species);
+                        .map(speciesEntity -> {
+                            speciesEntity.setName(updatedSpeciesEntity.getName());
+                            speciesService.updateOneSpecies(speciesEntity);
 
-                            return ResponseEntity.ok(species);
+                            return ResponseEntity.ok(speciesEntity);
 
                         }).orElseGet(() -> ResponseEntity.notFound().build())
 

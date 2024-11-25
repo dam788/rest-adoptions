@@ -1,10 +1,10 @@
 package com.restful.adoptions.user.controller;
 
-import com.restful.adoptions.user.model.User;
-import com.restful.adoptions.user.service.UserService;
-
+import com.restful.adoptions.user.model.UserEntity;
+import com.restful.adoptions.user.service.UserDetailServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -14,35 +14,37 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@PreAuthorize("deniedAll()")
 public class UserController {
 
     @Autowired
-    private UserService userService;
-
+    private UserDetailServiceImp userService;
 
 
     @GetMapping
-    public ResponseEntity <List <User> > getUsers () {
+    @PreAuthorize("hasAuthority('READ')")
+    public ResponseEntity <List <UserEntity> > getUsers () {
 
         return ResponseEntity.ok( userService.getAllUsers() );
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity <Optional <User> > getUser ( @PathVariable Long id ) {
+    @PreAuthorize("hasAuthority('READ')")
+    public ResponseEntity <Optional <UserEntity> > getUser (@PathVariable Long id ) {
 
         return ResponseEntity.ok( userService.getUserById(id) );
 
     }
 
-
     @PostMapping
-    public ResponseEntity <URI> createUser ( @RequestBody User user, UriComponentsBuilder ucb ) {
+    @PreAuthorize("hasAuthority('READ', 'CREATE')")
+    public ResponseEntity <URI> createUser (@RequestBody UserEntity userEntity, UriComponentsBuilder ucb ) {
 
-        User userSaved = userService.createOneUser(user);
+        UserEntity userEntitySaved = userService.createOneUser(userEntity);
         URI uriUser = ucb
                 .path("/api/v1/users/{id}")
-                .buildAndExpand(userSaved.getIdUser())
+                .buildAndExpand(userEntitySaved.getIdUser())
                 .toUri();
 
         return ResponseEntity.created( uriUser ).body(uriUser);
@@ -50,20 +52,16 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@RequestBody User updatedUser, @PathVariable Long id) {
+    @PreAuthorize("hasAuthority('READ', 'UPDATE')")
+    public ResponseEntity<?> updateUser(@RequestBody UserEntity updatedUserEntity, @PathVariable Long id) {
 
         return ResponseEntity.ok (
 
                 userService.getUserById(id)
                     .map(user -> {
 
-                        user.setUserName( updatedUser.getUserName() );
-                        user.setName( updatedUser.getName() );
-                        user.setPassword( updatedUser.getPassword() );
-                        user.setPhone( updatedUser.getPhone() );
-                        user.setAvatarUrl( updatedUser.getAvatarUrl() );
-                        user.setLocation( updatedUser.getLocation() );
-                        user.setCreatedPets( updatedUser.getCreatedPets() );
+                        user.setUsername( updatedUserEntity.getUsername() );
+                        user.setPassword( updatedUserEntity.getPassword() );
                         userService.updateOneUser(user);
 
                         return ResponseEntity.ok( user );
@@ -78,6 +76,7 @@ public class UserController {
     }
 
     @PutMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('READ', 'DELETE')")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
 
         return ResponseEntity.ok (
@@ -85,7 +84,7 @@ public class UserController {
                 userService.getUserById(id)
                         .map(user -> {
 
-                            user.setActive( false );
+                            user.setEnabled( false );
 
                             userService.deleteOneUser(user);
                             return ResponseEntity.ok(user);
