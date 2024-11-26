@@ -29,11 +29,11 @@ public class UserDetailServiceImp implements UserDetailsService {
 
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
-        userEntity.getRoles()
+        userEntity.getRoleEntities()
                 .forEach(role -> authorityList.add(new SimpleGrantedAuthority("ROLE_".concat(role.getRoleEnum().name()))));
 
-        userEntity.getRoles().stream()
-                .flatMap(role -> role.getPermissionList().stream())
+        userEntity.getRoleEntities().stream()
+                .flatMap(role -> role.getPermissionEntityList().stream())
                 .forEach(permission -> authorityList.add(new SimpleGrantedAuthority(permission.getName())));
 
 

@@ -1,14 +1,16 @@
 package com.restful.adoptions.user.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Builder
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -19,9 +21,17 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUser;
 
+    @NotBlank
+    @Size( max = 30 )
     @Column(unique = true)
     private String username;
 
+    @NotBlank
+    @Email
+    @Size( max = 30 )
+    private String email;
+
+    @NotBlank
     private String password;
 
     @Column(name = "is_enabled")
@@ -36,8 +46,16 @@ public class UserEntity {
     @Column(name = "credential_No_Expired")
     private boolean credentialNoExpired;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_role"))
-    private Set<Role> roles = new HashSet<>();
+    @ManyToMany(
+            targetEntity = RoleEntity.class,
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.PERSIST
+    )
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_role")
+    )
+    private Set<RoleEntity> roleEntities = new HashSet<>();
 
 }
