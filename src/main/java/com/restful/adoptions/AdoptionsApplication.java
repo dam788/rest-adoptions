@@ -1,7 +1,7 @@
 package com.restful.adoptions;
 
-import com.restful.adoptions.user.model.Permission;
-import com.restful.adoptions.user.model.Role;
+import com.restful.adoptions.user.model.PermissionEntity;
+import com.restful.adoptions.user.model.RoleEntity;
 import com.restful.adoptions.user.model.RoleEnum;
 import com.restful.adoptions.user.model.UserEntity;
 import com.restful.adoptions.user.repository.UserRepository;
@@ -26,32 +26,32 @@ public class AdoptionsApplication {
 		return args -> {
 
 			//* Create PERMISSIONS *//
-			Permission createPermission = Permission.builder()
+			PermissionEntity createPermission = PermissionEntity.builder()
 					.name("CREATE")
 					.build();
 
-			Permission readPermission = Permission.builder()
+			PermissionEntity readPermission = PermissionEntity.builder()
 					.name("READ")
 					.build();
 
-			Permission updatePermission = Permission.builder()
+			PermissionEntity updatePermission = PermissionEntity.builder()
 					.name("UPDATE")
 					.build();
 
-			Permission deletePermission = Permission.builder()
+			PermissionEntity deletePermission= PermissionEntity.builder()
 					.name("DELETE")
 					.build();
 
-			Permission refactorPermission = Permission.builder()
+			PermissionEntity refactorPermission = PermissionEntity.builder()
 					.name("DEV")
 					.build();
 
 
 
 			//* Create ROLES *//
-			Role roleAdmin = Role.builder()
+			RoleEntity roleAdmin = RoleEntity.builder()
 					.roleEnum(RoleEnum.ADMIN)
-					.permissionList(Set.of(
+					.permissionEntityList(Set.of(
 							createPermission,
 							readPermission,
 							updatePermission,
@@ -59,27 +59,27 @@ public class AdoptionsApplication {
 					))
 					.build();
 
-			Role roleUser = Role.builder()
+			RoleEntity roleUser = RoleEntity.builder()
 					.roleEnum(RoleEnum.USER)
-					.permissionList(Set.of(
+					.permissionEntityList(Set.of(
 							createPermission,
 							updatePermission,
 							readPermission
 					))
 					.build();
 
-			Role roleRefuge = Role.builder()
+			RoleEntity roleRefuge = RoleEntity.builder()
 					.roleEnum(RoleEnum.REFUGE)
-					.permissionList(Set.of(
+					.permissionEntityList(Set.of(
 							createPermission,
 							updatePermission,
 							readPermission
 					))
 					.build();
 
-			Role roleDeveloper = Role.builder()
+			RoleEntity roleDeveloper = RoleEntity.builder()
 					.roleEnum(RoleEnum.DEV)
-					.permissionList(Set.of(
+					.permissionEntityList(Set.of(
 							createPermission,
 							readPermission,
 							updatePermission,
@@ -90,53 +90,55 @@ public class AdoptionsApplication {
 
 
 			//* CREATE USERS *//
-			UserEntity userEntityDamian = UserEntity.builder()
+			UserEntity userDamian = UserEntity.builder()
 					.password("1234")
+					.email("dam788@gmail.com")
 					.username("dam788")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)
 					.credentialNoExpired(true)
-					.roles(Set.of(roleAdmin))
+					.roleEntities(Set.of(roleAdmin))
 					.build();
 
-			UserEntity userEntityAle = UserEntity.builder()
+			UserEntity userAle = UserEntity.builder()
 					.password("1234")
+					.email("alegnr@gmail.com")
 					.username("ale_gnr")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)
 					.credentialNoExpired(true)
-					.roles(Set.of(roleDeveloper))
+					.roleEntities(Set.of(roleDeveloper))
 					.build();
 
-			UserEntity userEntityRefugio = UserEntity.builder()
+			UserEntity userRefugio = UserEntity.builder()
 					.password("1234")
+					.email("refugio22@gmail.com")
 					.username("refugio_23")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)
 					.credentialNoExpired(true)
-					.roles(Set.of(roleRefuge))
+					.roleEntities(Set.of(roleRefuge))
 					.build();
 
-			UserEntity userEntityCarlos = UserEntity.builder()
+			UserEntity userCarlos = UserEntity.builder()
 					.password("1234")
 					.username("carlos_cabj_97")
+					.email("carlos_cabj_97@gmail.com")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)
 					.credentialNoExpired(true)
-					.roles(Set.of(roleUser))
+					.roleEntities(Set.of(roleUser))
 					.build();
 
 			user.saveAll(List.of(
-
-					userEntityDamian,
-					userEntityAle,
-					userEntityRefugio,
-					userEntityCarlos
-
+					userDamian,
+					userAle,
+					userRefugio,
+					userCarlos
 			));
 		};
 	}

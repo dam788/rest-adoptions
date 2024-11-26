@@ -7,13 +7,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Builder
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "roles")
-public class Role {
+public class RoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +28,6 @@ public class Role {
             joinColumns = @JoinColumn(name= "id_role"),
             inverseJoinColumns = @JoinColumn(name = "id_permission")
     )
-    private Set<Permission> permissionList = new HashSet<>();
+    private Set<PermissionEntity> permissionEntityList = new HashSet<>();
 
 }
