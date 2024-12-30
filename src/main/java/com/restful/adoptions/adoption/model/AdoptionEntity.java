@@ -3,12 +3,13 @@ package com.restful.adoptions.adoption.model;
 import com.restful.adoptions.pet.model.PetEntity;
 import com.restful.adoptions.user.model.UserEntity;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity

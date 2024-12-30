@@ -1,5 +1,6 @@
 package com.restful.adoptions.user.controller;
 
+import com.restful.adoptions.user.controller.dto.UserDTO;
 import com.restful.adoptions.user.model.UserEntity;
 import com.restful.adoptions.user.service.UserDetailServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -23,17 +25,25 @@ public class UserController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('READ')")
-    public ResponseEntity <List <UserEntity> > getUsers () {
+    public ResponseEntity<List<UserDTO>> getUsers() {
 
-        return ResponseEntity.ok( userService.getAllUsers() );
+        List<UserDTO> users = userService.getAllUsers()
+                .stream()
+                .map(userService::convertToUserDTO)
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(users);
 
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('READ')")
-    public ResponseEntity <Optional <UserEntity> > getUser (@PathVariable Long id ) {
+    public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
 
-        return ResponseEntity.ok( userService.getUserById(id) );
+        Optional<UserEntity> user = userService.getUserById(id);
+
+        return user.map(userDTO -> ResponseEntity.ok(userService.convertToUserDTO(userDTO)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
 
     }
 

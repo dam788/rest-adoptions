@@ -5,15 +5,13 @@ import com.restful.adoptions.petimage.model.PetImageEntity;
 import com.restful.adoptions.specie.model.SpeciesEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
 
-@Setter
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -53,6 +51,11 @@ public class PetEntity {
     @JoinColumn( name = "idLocation" )
     private LocationEntity locationEntity;
 
+    @JoinTable(
+            name = "pets_images",
+            joinColumns = @JoinColumn(name = "pet"),
+            inverseJoinColumns = @JoinColumn(name = "image")
+    )
     @OneToMany
     private List<PetImageEntity> petImageEntities;
 

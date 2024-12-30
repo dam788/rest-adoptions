@@ -9,6 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 import java.util.Set;
@@ -18,6 +19,10 @@ public class AdoptionsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdoptionsApplication.class, args);
+	}
+
+	public static String encodePassword(String password) {
+		return new BCryptPasswordEncoder().encode(password);
 	}
 
 	@Bean
@@ -91,7 +96,7 @@ public class AdoptionsApplication {
 
 			//* CREATE USERS *//
 			UserEntity userDamian = UserEntity.builder()
-					.password("1234")
+					.password(encodePassword("1234"))
 					.email("dam788@gmail.com")
 					.username("dam788")
 					.isEnabled(true)
@@ -102,7 +107,7 @@ public class AdoptionsApplication {
 					.build();
 
 			UserEntity userAle = UserEntity.builder()
-					.password("1234")
+					.password(encodePassword("1234"))
 					.email("alegnr@gmail.com")
 					.username("ale_gnr")
 					.isEnabled(true)
@@ -113,7 +118,7 @@ public class AdoptionsApplication {
 					.build();
 
 			UserEntity userRefugio = UserEntity.builder()
-					.password("1234")
+					.password(encodePassword("1234"))
 					.email("refugio22@gmail.com")
 					.username("refugio_23")
 					.isEnabled(true)
@@ -124,7 +129,7 @@ public class AdoptionsApplication {
 					.build();
 
 			UserEntity userCarlos = UserEntity.builder()
-					.password("1234")
+					.password(encodePassword("123456"))
 					.username("carlos_cabj_97")
 					.email("carlos_cabj_97@gmail.com")
 					.isEnabled(true)

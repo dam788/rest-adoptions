@@ -32,7 +32,7 @@ public class PetImageController {
         PetImageEntity imageSaved = petImageService.createOnePickImage(petImageEntity);
         URI uriImage = ucb
                 .path( "/api/v1/images/{id}" )
-                .buildAndExpand( imageSaved.getIdPetImage() )
+                .buildAndExpand(imageSaved.getIdImage())
                 .toUri();
 
         return ResponseEntity.created( uriImage ).body( imageSaved );

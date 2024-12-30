@@ -1,5 +1,6 @@
 package com.restful.adoptions.user.service;
 
+import com.restful.adoptions.user.controller.dto.UserDTO;
 import com.restful.adoptions.user.model.UserEntity;
 import com.restful.adoptions.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,11 +61,21 @@ public class UserDetailServiceImp implements UserDetailsService {
         return userRepository.save(userEntity);
     }
 
-    public UserEntity updateOneUser (UserEntity userEntity) {
-        return userRepository.save(userEntity);
+    public void updateOneUser(UserEntity userEntity) {
+        userRepository.save(userEntity);
     }
 
-    public UserEntity deleteOneUser (UserEntity userEntity) {
-        return userRepository.save(userEntity);
+    public void deleteOneUser(UserEntity userEntity) {
+        userRepository.save(userEntity);
+    }
+
+    public UserDTO convertToUserDTO(UserEntity user) {
+        return new UserDTO(
+                user.getIdUser(),
+                user.getUsername(),
+                user.getEmail(),
+                user.isEnabled(),
+                user.getRoleEntities()
+        );
     }
 }
