@@ -56,7 +56,7 @@ public class PetEntity {
             joinColumns = @JoinColumn(name = "pet"),
             inverseJoinColumns = @JoinColumn(name = "image")
     )
-//    @OneToMany
+    @OneToMany
     private List<PetImageEntity> petImageEntities;
 
 }
