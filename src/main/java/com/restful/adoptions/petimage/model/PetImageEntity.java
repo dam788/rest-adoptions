@@ -1,9 +1,11 @@
 package com.restful.adoptions.petimage.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Objects;
 
+@Data
 @Entity
 @Table( name = "pet_images")
 public class PetImageEntity {
@@ -13,22 +15,6 @@ public class PetImageEntity {
     private Long idPetImage;
 
     private String imageUrl;
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public Long getIdPetImage() {
-        return idPetImage;
-    }
-
-    public void setIdPetImage(Long idPetImage) {
-        this.idPetImage = idPetImage;
-    }
 
     @Override
     public boolean equals(Object o) {
