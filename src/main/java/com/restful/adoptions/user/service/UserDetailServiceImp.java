@@ -1,9 +1,12 @@
 package com.restful.adoptions.user.service;
 
+import com.restful.adoptions.user.controller.dto.AuthCreateUserRequest;
 import com.restful.adoptions.user.controller.dto.AuthLoginRequest;
 import com.restful.adoptions.user.controller.dto.AuthReponse;
 import com.restful.adoptions.user.controller.dto.UserDTO;
+import com.restful.adoptions.user.model.RoleEntity;
 import com.restful.adoptions.user.model.UserEntity;
+import com.restful.adoptions.user.repository.RoleRepository;
 import com.restful.adoptions.user.repository.UserRepository;
 import com.restful.adoptions.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +22,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 
 @Service
 public class UserDetailServiceImp implements UserDetailsService {
@@ -34,6 +36,9 @@ public class UserDetailServiceImp implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
 
     @Override
@@ -72,8 +77,7 @@ public class UserDetailServiceImp implements UserDetailsService {
 
         String accessToken = jwtUtils.createToken(authentication);
 
-        AuthReponse authReponse = new AuthReponse(username, "User loged successfuly", accessToken, true);
-        return authReponse;
+        return new AuthReponse(username, "User loged successfuly", accessToken, true);
     }
 
     public Authentication authenticate(String username, String password){
@@ -88,6 +92,59 @@ public class UserDetailServiceImp implements UserDetailsService {
         return  new UsernamePasswordAuthenticationToken(username, userDetails.getPassword(), userDetails.getAuthorities());
     }
 
+    public AuthReponse createUser(AuthCreateUserRequest authCreateUserRequest) throws IllegalAccessException {
+        String username = authCreateUserRequest.username();
+        String email = authCreateUserRequest.email();
+        String password = authCreateUserRequest.password();
+        List<String> roleRequest = authCreateUserRequest.roleRequest().roleListName();
+
+        Set<RoleEntity> roleEntitySet = new HashSet<>(roleRepository.findRoleEntitiesByRoleEnumIn(roleRequest));
+
+        if(roleEntitySet.isEmpty()) {
+            throw  new IllegalAccessException("The roles specified does not exist.");
+        }
+
+        UserEntity userEntity = UserEntity.builder()
+                .username(username)
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .roleEntities(roleEntitySet)
+                .accountNoExpired(true)
+                .accountNoLocked(true)
+                .credentialNoExpired(true)
+                .isEnabled(true)
+                .build();
+
+        UserEntity userCreated = userRepository.save(userEntity);
+
+        ArrayList<SimpleGrantedAuthority> authorityList = new ArrayList<>();
+
+        userCreated.getRoleEntities().forEach(
+                role -> authorityList.add(
+                        new SimpleGrantedAuthority( "ROLE_".concat( role.getRoleEnum().name() ))
+                )
+        );
+        userCreated.getRoleEntities()
+                .stream()
+                .flatMap( role -> role.getPermissionEntityList().stream())
+                .forEach( permission -> authorityList.add(new SimpleGrantedAuthority( permission.getName() )));
+
+        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                userCreated.getUsername(),
+                userCreated.getPassword(),
+                authorityList
+        );
+
+        String accessToken = jwtUtils.createToken(authentication);
+
+        return new AuthReponse(
+                userCreated.getUsername(),
+                "User created Successfully",
+                accessToken,
+                true
+        );
+    }
+
     public List <UserEntity> getAllUsers () {
         return userRepository.findAll();
     }
@@ -96,24 +153,11 @@ public class UserDetailServiceImp implements UserDetailsService {
         return userRepository.findById( id );
     }
 
-    public UserEntity createOneUser (UserEntity userEntity) {
-        return userRepository.save(userEntity);
-    }
-
-    public void updateOneUser (UserEntity userEntity) {
-        userRepository.save(userEntity);
-    }
-
-    public void deleteOneUser (UserEntity userEntity) {
-        userRepository.save(userEntity);
-    }
-
     public UserDTO convertToUserDTO(UserEntity user) {
         return new UserDTO(
                 user.getIdUser(),
                 user.getUsername(),
                 user.getEmail(),
-                user.isEnabled(),
                 user.getRoleEntities()
         );
     }
