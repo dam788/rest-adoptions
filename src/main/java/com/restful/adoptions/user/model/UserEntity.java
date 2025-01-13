@@ -1,10 +1,14 @@
 package com.restful.adoptions.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,17 +36,21 @@ public class UserEntity {
     private String email;
 
     @NotBlank
+    @JsonIgnore
     private String password;
 
     @Column(name = "is_enabled")
     private boolean isEnabled;
 
+    @JsonIgnore
     @Column(name = "account_No_Expired")
     private boolean accountNoExpired;
 
+    @JsonIgnore
     @Column(name = "account_No_Locked")
     private boolean accountNoLocked;
 
+    @JsonIgnore
     @Column(name = "credential_No_Expired")
     private boolean credentialNoExpired;
 
