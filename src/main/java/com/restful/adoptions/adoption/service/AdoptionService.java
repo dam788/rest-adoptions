@@ -28,8 +28,8 @@ public class AdoptionService {
         return adoptionRepository.save(adoptionEntity);
     }
 
-    public AdoptionEntity updateOneAdoption(AdoptionEntity adoptionEntity) {
-        return adoptionRepository.save(adoptionEntity);
+    public void updateOneAdoption(AdoptionEntity adoptionEntity) {
+        adoptionRepository.save(adoptionEntity);
     }
 
     public void deleteAdoptionById(Long id) {
