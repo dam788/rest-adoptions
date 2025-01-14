@@ -76,8 +76,7 @@ public class PetEntity {
 
     @OneToMany(
             targetEntity = PetImageEntity.class,
-            fetch = FetchType.EAGER,
-            mappedBy = "pet"
+            fetch = FetchType.EAGER
     )
     @Schema(description = "Lista de imágenes asociadas a la mascota")
     private List<PetImageEntity> images;
