@@ -24,12 +24,12 @@ public class AdoptionEntity {
     private Long idAdoption;
 
     @ManyToOne
-    @JoinColumn(name = "idPet")
+    @JoinColumn(name = "idPet", nullable = false)
     @Schema(description = "Mascota que está siendo adoptada")
     private PetEntity pet;
 
     @ManyToOne
-    @JoinColumn(name = "idUser")
+    @JoinColumn(name = "idUser", nullable = false)
     @Schema(description = "Usuario que adopta la mascota")
     private UserEntity user;
 
