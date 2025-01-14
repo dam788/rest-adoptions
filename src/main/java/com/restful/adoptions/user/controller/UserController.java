@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/users")
 @Tag(name = "Usuarios", description = "API para gestionar usuarios en la plataforma")
-@PreAuthorize("deniedAll()")
 public class UserController {
 
     @Autowired
@@ -32,7 +31,6 @@ public class UserController {
     @Operation(summary = "Obtener todos los usuarios", description = "Devuelve una lista de todos los usuarios registrados.")
     @ApiResponse(responseCode = "200", description = "Lista de usuarios obtenida correctamente")
     @GetMapping
-    @PreAuthorize("hasAuthority('READ')")
     public ResponseEntity<List<UserDTO>> getUsers() {
 
         List<UserDTO> users = userService.getAllUsers()
@@ -50,7 +48,6 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Usuario no encontrado")
     })
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('READ')")
     public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
 
         Optional<UserEntity> user = userService.getUserById(id);
