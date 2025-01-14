@@ -68,19 +68,18 @@ public class PetEntity {
     @OneToOne
     @JoinColumn(name = "idSpecies")
     @Schema(description = "Especie a la que pertenece la mascota")
-    private SpeciesEntity speciesEntity;
+    private SpeciesEntity species;
 
     @OneToOne
     @JoinColumn( name = "idLocation" )
-    private LocationEntity locationEntity;
+    private LocationEntity location;
 
-    @JoinTable(
-            name = "pets_images",
-            joinColumns = @JoinColumn(name = "pet"),
-            inverseJoinColumns = @JoinColumn(name = "image")
+    @OneToMany(
+            targetEntity = PetImageEntity.class,
+            fetch = FetchType.EAGER,
+            mappedBy = "pet"
     )
-    @OneToMany
     @Schema(description = "Lista de imágenes asociadas a la mascota")
-    private List<PetImageEntity> petImageEntities;
+    private List<PetImageEntity> images;
 
 }

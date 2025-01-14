@@ -86,9 +86,9 @@ public class PetController {
                             petEntity.setGender( updatedPetEntity.getGender() );
                             petEntity.setAvailable( true );
                             petEntity.setAvatarUrl( updatedPetEntity.getAvatarUrl() );
-                            petEntity.setSpeciesEntity( updatedPetEntity.getSpeciesEntity() );
-                            petEntity.setPetImageEntities( updatedPetEntity.getPetImageEntities() );
-                            petEntity.setLocationEntity( updatedPetEntity.getLocationEntity() );
+                            petEntity.setSpecies(updatedPetEntity.getSpecies());
+                            petEntity.setImages(updatedPetEntity.getImages());
+                            petEntity.setLocation(updatedPetEntity.getLocation());
                             petService.updateOnePet(petEntity);
 
                             return ResponseEntity.ok(petEntity);

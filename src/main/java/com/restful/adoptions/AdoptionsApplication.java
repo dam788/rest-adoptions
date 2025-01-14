@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -109,7 +108,7 @@ public class AdoptionsApplication {
 			UserEntity userAle = UserEntity.builder()
 					.password(encodePassword("1234"))
 					.email("alegnr@gmail.com")
-					.username("ale_gnr")
+//					.username("ale_gnr")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)
@@ -139,12 +138,12 @@ public class AdoptionsApplication {
 					.roleEntities(Set.of(roleUser))
 					.build();
 
-			user.saveAll(List.of(
+			/*user.saveAll(List.of(
 					userDamian,
 					userAle,
 					userRefugio,
 					userCarlos
-			));
+			));*/
 		};
 	}
 
