@@ -20,5 +20,4 @@ public class PetImageEntity {
     @Column(nullable = false)
     @Schema(description = "URL de la imagen almacenada", example = "https://example.com/images/pet123.jpg")
     private String imageUrl;
-
 }
