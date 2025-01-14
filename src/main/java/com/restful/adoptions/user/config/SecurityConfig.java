@@ -51,7 +51,6 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.GET, "/api/v1/users").permitAll();
 
                     // privated endpoints
-
                     http.requestMatchers(HttpMethod.POST, "/api/v1/adoptions").hasAnyRole("USER", "ADMIN","REFUGE");
                     http.requestMatchers(HttpMethod.PUT, "/api/v1/adoptions/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
                     http.requestMatchers(HttpMethod.PATCH, "/api/v1/adoptions/delete/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
