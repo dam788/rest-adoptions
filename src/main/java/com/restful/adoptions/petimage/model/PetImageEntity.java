@@ -22,7 +22,4 @@ public class PetImageEntity {
     @Schema(description = "URL de la imagen almacenada", example = "https://example.com/images/pet123.jpg")
     private String imageUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "pet")
-    private PetEntity pet;
 }
