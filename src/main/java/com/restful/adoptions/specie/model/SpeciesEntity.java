@@ -18,6 +18,7 @@ public class SpeciesEntity {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long idSpecies;
 
+    @Column(unique = true)
     private String name;
 
     @Temporal(TemporalType.TIMESTAMP)

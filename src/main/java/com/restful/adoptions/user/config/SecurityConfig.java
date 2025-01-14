@@ -43,10 +43,37 @@ public class SecurityConfig {
                 .authorizeHttpRequests( http -> {
 
                     // public endpoints
+                    http.requestMatchers(HttpMethod.GET, "/api/v1/adoptions").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/api/v1/locations").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/api/v1/pets").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/api/v1/images").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/api/v1/species").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/api/v1/users").permitAll();
 
                     // privated endpoints
-                    http.requestMatchers(HttpMethod.GET, "/api/v1/users").hasAuthority("READ");
+
+                    http.requestMatchers(HttpMethod.POST, "/api/v1/adoptions").hasAnyRole("USER", "ADMIN","REFUGE");
+                    http.requestMatchers(HttpMethod.PUT, "/api/v1/adoptions/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
+                    http.requestMatchers(HttpMethod.PATCH, "/api/v1/adoptions/delete/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
+
+                    http.requestMatchers(HttpMethod.POST, "/api/v1/locations").hasAnyRole("USER", "ADMIN","REFUGE");
+                    http.requestMatchers(HttpMethod.PUT, "/api/v1/locations/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
+                    http.requestMatchers(HttpMethod.PATCH, "/api/v1/locations/delete/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
+
+                    http.requestMatchers(HttpMethod.POST, "/api/v1/pets").hasAnyRole("USER", "ADMIN","REFUGE");
+                    http.requestMatchers(HttpMethod.PUT, "/api/v1/pets/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
+                    http.requestMatchers(HttpMethod.PATCH, "/api/v1/pets/delete/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
+                    http.requestMatchers(HttpMethod.PUT, "/api/v1/pets/not-available/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
+
+                    http.requestMatchers(HttpMethod.POST, "/api/v1/images").hasAnyRole("USER", "ADMIN","REFUGE");
+                    http.requestMatchers(HttpMethod.PATCH, "/api/v1/images/delete/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
+
+                    http.requestMatchers(HttpMethod.POST, "/api/v1/species").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT, "/api/v1/species/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PATCH, "/api/v1/species/delete/{id}").hasRole("ADMIN");
+
+                    http.requestMatchers(HttpMethod.GET, "/api/v1/users").hasAnyRole("USER", "ADMIN","REFUGE");
+                    http.requestMatchers(HttpMethod.GET, "/api/v1/users/{id}").hasAnyRole("USER", "ADMIN","REFUGE");
 
                     // some other http state is denied (or permited)
                     http.anyRequest().permitAll();
