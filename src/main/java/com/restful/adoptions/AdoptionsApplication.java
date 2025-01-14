@@ -108,7 +108,7 @@ public class AdoptionsApplication {
 			UserEntity userAle = UserEntity.builder()
 					.password(encodePassword("1234"))
 					.email("alegnr@gmail.com")
-//					.username("ale_gnr")
+					.username("ale_gnr")
 					.isEnabled(true)
 					.accountNoExpired(true)
 					.accountNoLocked(true)
