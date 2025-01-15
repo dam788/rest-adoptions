@@ -37,9 +37,9 @@
  - Luego vuelva a su archivo **application.properties** y reemplace las variables por lo siguiente:
 
 	    # Database configuration
-	    spring.datasource.url=jdbc:mysql://localhost:3306/jpa_adoptions?autoReconnect=true
-	    spring.datasource.username=jpa_adoptation_user
-	    spring.datasource.password=18MonsterMocca2024
+	    spring.datasource.url=jdbc:mysql://localhost:3306/adoptions?autoReconnect=true
+	    spring.datasource.username=test-user
+	    spring.datasource.password=123456
 	    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
     
 	    spring.jpa.hibernate.ddl-auto=update
