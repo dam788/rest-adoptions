@@ -68,8 +68,6 @@
 
 - Una vez que levanto su proyecto puede acceder al navegador web con la siguiente dirección: http://localhost:8080/swagger-ui.html
 
+---
 
-
-
------------------
-_By Hugo Morales y Alejandro Alonso_
+_By [Hugo Morales](https://github.com/dam788/) y [Alejandro Alonso](https://github.com/aleAlonso90)._
