@@ -1,4 +1,11 @@
-# Instalación
+# API de Adopciones
+
+![image](https://github.com/user-attachments/assets/24040f12-5b27-4bfd-a84a-b925db96620d)
+
+
+
+
+## Instalación
 
 
  - Dentro de la carpeta resources encontrará el archivo **application.properties** con la siguiente configuración:
@@ -57,6 +64,6 @@
  - En la **security.jwt.key.private** puede poner lo que quiera siempre y cuando este codificado, si no sabe como puede utilizar esta página para generara una agregando la palabra que usted desee -> [LINK](https://emn178.github.io/online-tools/sha256.html). En **security.jwt.user.generator** también debe agregar la palabra secreta que usted quiera.
  - Ahora ya puede levantar su aplicación de springboot, si quiere utilizando los shortcuts de **maven** que vienen por defecto en su **IDE IntelliJ**.
 
-# Documentación de la API
+## Documentación de la API
 
 - Una vez que levanto su proyecto puede acceder al navegador web con la siguiente dirección: http://localhost:8080/swagger-ui.html
