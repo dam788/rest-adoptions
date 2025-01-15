@@ -67,3 +67,9 @@
 ## Documentación de la API
 
 - Una vez que levanto su proyecto puede acceder al navegador web con la siguiente dirección: http://localhost:8080/swagger-ui.html
+
+
+
+
+-----------------
+_By Hugo Morales y Alejandro Alonso_
