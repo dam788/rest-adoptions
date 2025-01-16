@@ -2,6 +2,8 @@
 
 ![image](https://github.com/user-attachments/assets/24040f12-5b27-4bfd-a84a-b925db96620d)
 
+>Hola! Sean bienvenidos, es esta ocación estamos orgullosos de traerles buenas nuevas! Con mucho esfuerzo estuvimos desarrollando una api para adopción de mascotas, que es útil para facilitar  visibilidad, la transacción de las partes y mantener un registro de los animalitos que fueron adoptados. Con el tiempo  vamos a ir iterando y agregando nuevas features, por lo pronto esta en su versión básica la cual ya cuenta con login y registro de mascotas. Espero que les guste y esperamos su aporte!.
+
 
 ## Instalación
 
