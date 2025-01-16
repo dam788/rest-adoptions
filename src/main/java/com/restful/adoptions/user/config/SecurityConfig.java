@@ -56,7 +56,7 @@ public class SecurityConfig {
                     // privated by roles
                     http.requestMatchers(HttpMethod.POST, "/api/v1/adoptions").hasAnyRole("USER", "ADMIN", "REFUGE", "DEV");
                     http.requestMatchers(HttpMethod.PUT, "/api/v1/adoptions/**").hasAnyRole("USER", "ADMIN", "REFUGE", "DEV");
-                    http.requestMatchers(HttpMethod.PATCH, "/api/v1/adoptions/delete/**").hasAnyRole("USER", "ADMIN", "REFUGE", "DEV");
+                    http.requestMatchers(HttpMethod.DELETE, "/api/v1/adoptions/delete/**").hasAnyRole("USER", "ADMIN", "REFUGE", "DEV");
 
                     http.requestMatchers(HttpMethod.POST, "/api/v1/locations").hasAnyRole("USER", "ADMIN", "REFUGE", "DEV");
                     http.requestMatchers(HttpMethod.PUT, "/api/v1/locations/**").hasAnyRole("USER", "ADMIN", "REFUGE", "DEV");
