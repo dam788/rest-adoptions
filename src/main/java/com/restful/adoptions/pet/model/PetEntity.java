@@ -65,13 +65,14 @@ public class PetEntity {
         this.updatedAt = new Date();
     }
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "idSpecies")
     @Schema(description = "Especie a la que pertenece la mascota")
     private SpeciesEntity species;
 
-    @OneToOne
-    @JoinColumn( name = "idLocation" )
+    @ManyToOne
+    @JoinColumn(name = "idLocation")
+    @Schema(description = "Ubicación de la mascota")
     private LocationEntity location;
 
     @OneToMany(
