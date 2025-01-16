@@ -35,6 +35,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain ( HttpSecurity httpSecurity ) throws Exception {
         // configure security roules
         return httpSecurity
+                .cors() // Habilitar CORS
+                .and()
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(  session ->session.sessionCreationPolicy(
