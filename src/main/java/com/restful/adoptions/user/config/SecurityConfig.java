@@ -72,7 +72,7 @@ public class SecurityConfig {
 
                     http.requestMatchers(HttpMethod.GET, "/api/v1/users/**").hasAnyRole("USER", "ADMIN", "REFUGE", "DEV");
 
-                    // Any unregistered route is denied
+                    // any unregistered route is denied
                     http.anyRequest().denyAll();
 
                 })
