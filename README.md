@@ -78,6 +78,9 @@ Podes copiar y pegar estos curls en posman para agregar los los endpoints y real
 
 ***Nota Importante:***
 
+- Si querés podes agregar unos usuarios creador por patrón builder que dejé en el archivo **AdoptionsApplication**, lo único que tenes que hacer es descomentar las líneas de **user.saveAll(...)** 
+ que están al final y correr la app una primera vez y luego volver a comentarlas ya que sino cuando vuelva a subir la app no va a funcionar porque los usuarios ya van a estar registrados en la base de datos y no se puede repetir data.
+
  - Una vez que agregue los **curls**, lo primero que tiene que hacer es iniciar sesión con un usuario por postman (...si, podes usar el que está de prueba, ese ya es usuario admin) y en la respuesta le va a llegar un **jwt**. Copie solo el jwt (sin comillas).
 
 ![image](https://github.com/user-attachments/assets/e107abb5-2ec5-40e7-bd97-4a72e0dc733c)
