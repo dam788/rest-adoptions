@@ -35,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain ( HttpSecurity httpSecurity ) throws Exception {
         // configure security roules
         return httpSecurity
-                .cors() // Habilitar CORS
+                .cors() // enable CORS
                 .and()
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
