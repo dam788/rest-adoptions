@@ -22,6 +22,7 @@ public class LocationEntity {
     @Schema(description = "Provincia donde se encuentra la mascota.")
     private String province;
 
+    @Column(unique = true, nullable = false)
     @Schema(description = "Ciudad donde se encuentra la mascota.")
     private String city;
 

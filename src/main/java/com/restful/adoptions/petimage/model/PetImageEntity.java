@@ -1,6 +1,5 @@
 package com.restful.adoptions.petimage.model;
 
-import com.restful.adoptions.pet.model.PetEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,7 +17,7 @@ public class PetImageEntity {
     @Schema(description = "ID único de la imagen", example = "1")
     private Long idImage;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     @Schema(description = "URL de la imagen almacenada", example = "https://example.com/images/pet123.jpg")
     private String imageUrl;
 
