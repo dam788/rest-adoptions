@@ -17,10 +17,10 @@ services:
     image: mysql
     container_name: mysql_database
     environment:
-      MYSQL_ROOT_PASSWORD: aabbccdd11
-      MYSQL_DATABASE: jpa_adoptions
-      MYSQL_USER: jpa_adoptation_user
-      MYSQL_PASSWORD: 18MonsterMocca2024
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3307:3306"
     networks:
