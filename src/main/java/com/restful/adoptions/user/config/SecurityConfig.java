@@ -43,16 +43,6 @@ public class SecurityConfig {
                         SessionCreationPolicy.STATELESS
                 ))
                 .authorizeHttpRequests( http -> {
-
-                    // public endpoints
-                    http.requestMatchers(HttpMethod.GET, "/api/v1/adoptions").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/api/v1/locations/**").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/api/v1/pets").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/api/v1/images").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/api/v1/species").permitAll();
-                    http.requestMatchers(HttpMethod.GET, "/api/v1/users").permitAll();
-                    http.requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll();
-
                     // privated by roles
                     http.requestMatchers(HttpMethod.POST, "/api/v1/adoptions").hasAnyRole("USER", "ADMIN", "REFUGE", "DEV");
                     http.requestMatchers(HttpMethod.PUT, "/api/v1/adoptions/**").hasAnyRole("USER", "ADMIN", "REFUGE", "DEV");
@@ -74,8 +64,8 @@ public class SecurityConfig {
 
                     http.requestMatchers(HttpMethod.GET, "/api/v1/users/**").hasAnyRole("USER", "ADMIN", "REFUGE", "DEV");
 
-                    // any unregistered route is denied
-                    http.anyRequest().denyAll();
+                    // any unregistered route is permited
+                    http.anyRequest().permitAll();
 
                 })
                 .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
