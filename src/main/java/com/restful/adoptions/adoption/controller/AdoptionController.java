@@ -84,7 +84,7 @@ public class AdoptionController {
     public ResponseEntity<String> deleteAdoption (@PathVariable Long id) {
         adoptionService.deleteAdoptionById(id);
 
-        return ResponseEntity.ok().body("Was delete species with id " + id);
+        return ResponseEntity.ok().body("Was delete adoption with id " + id);
     }
 
 }
